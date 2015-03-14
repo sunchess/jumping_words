@@ -4,7 +4,7 @@ class SayWords
   def initialize(options={})
     @db = DbWords.new
     @collection = @db.collection
-    @show_message = options[:show_message] || SHOW_MESSAGE
+    @show_message = options[:show_message].nil? ? SHOW_MESSAGE : options[:show_message]
     @space_words = options[:space_words] || SPACE_WORDS
     @space_interation = options[:space_interation] || SPACE_INTERATION
   end
@@ -34,6 +34,8 @@ class SayWords
         sleep @space_interation
       end
       sleep 4 # for notification hiding
+      #cleaning
+      GC.start
     end
   end
 
@@ -54,6 +56,9 @@ class SayWords
         sleep @space_interation
       end
       sleep 4 # for notification hiding
+
+      #cleaning
+      GC.start
     end
 
   end

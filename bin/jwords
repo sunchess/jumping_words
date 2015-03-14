@@ -1,13 +1,30 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
 require 'optparse'
+require 'ostruct'
 require 'pp'
 
 $:.push File.expand_path("../../lib", __FILE__)
 require 'jumping_words'
 
-options = {}
-optparse = OptionParser.new do|opts|
+options = OpenStruct.new
+options.message = SHOW_MESSAGE
+options.space_words = SPACE_WORDS
+options.space_interation = SPACE_INTERATION
+
+optparse = OptionParser.new do |opts|
+
+  opts.on( '-n', '--no-message', 'No display message' ) do
+    options.message = false
+  end
+
+  opts.on( '-w', '--space-words [SPACE]', Integer, "Space between a word and translate. Default: #{SPACE_WORDS}" ) do |space_words|
+    options.space_words = space_words
+  end
+
+  opts.on( '-i', '--space-interation [SPACE]', Integer, "Space an each interation. Default: #{SPACE_INTERATION}" ) do |space_interation|
+    options.space_interation = space_interation
+  end
 
   #The command addes a word
   opts.on( '-a', '--add', 'Add the word' ) do
@@ -33,25 +50,32 @@ optparse = OptionParser.new do|opts|
     end
   end
 
-  #The list of words
-  opts.on( '-l', '--list', 'List of words' ) do
-    db = DbWords.new
-    db.list
-    exit
-  end
 
-  #run the application
-  opts.on( '-s', '--start', 'Start of app' ) do
-    db = DbWords.new
-    app = SayWords.new(:show_message => SHOW_MESSAGE,  :space_words => SPACE_WORDS, :space_interation => SPACE_INTERATION)
-
-    begin
-      app.run
-    rescue Interrupt
-      puts "Exiting..."
-    end
-  end
 
 end
 
 optparse.parse!
+
+puts "Show message: #{options.message}"
+puts "Timeout between a word and translate: #{options.space_words} sec."
+puts "Timeout to start list: #{options.space_interation} sec."
+
+#run the application
+if ARGV.first == 'start'
+  db = DbWords.new
+  app = SayWords.new(:show_message => options.message,  :space_words => options.space_words, :space_interation => options.space_interation)
+
+  begin
+    app.run
+  rescue Interrupt
+    puts "Exiting..."
+  end
+end
+
+
+#The list of words
+if ARGV.first == 'list'
+  db = DbWords.new
+  db.list
+  exit
+end

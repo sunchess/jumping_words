@@ -12,24 +12,28 @@ For MAC OS X for the Russian users you must change the voice of system to Milena
 
 == Actions
 Starting
-  jwords -s
+  jwords start
 
 Stoping
   ctrl+c
 
 View a list of words
-  jwords -l
+  jwords list
 
-  1 to write: писать
-  2 root: корень
-  3 list: список
+  1 convenient: удобный | 7
+  2 If I were you: на твоем месте | 6
+  3 in turns: по очереди | 5
+  4 endurance: выносливость | 2
+  5 spoil, spoilt, spoilt: портиться, испортилось | 2
+  6 to lead, led, led: приводить, привели | 2
+  7 to achieve: достигать | 2
   ...
 
 Adding words to the database
   jwords -a root: корень
   jwords -a to play: играть
 
-Delete a word from the database (indicated by the index of the word)
+Delete a word from the database (indicated by the index of the word in the list)
   jwords -d 1
 
 If you want to change words in directly in CSV find .jwords directory in your home directory, then open jumping_words_db.csv. After saving the file restart the script.
