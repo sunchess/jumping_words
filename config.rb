@@ -8,3 +8,7 @@ SPACE_WORDS = 3
 SPACE_INTERATION = 10
 #show message box true or false
 SHOW_MESSAGE = true
+#MAC OS X word voice
+MAC_WORD_VOICE = 'Vicki'
+#MAC OS X translate voice
+MAC_TRANSLATE_VOICE = 'Milena'

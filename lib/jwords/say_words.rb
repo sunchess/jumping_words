@@ -7,6 +7,8 @@ class SayWords
     @show_message = options[:show_message].nil? ? SHOW_MESSAGE : options[:show_message]
     @space_words = options[:space_words] || SPACE_WORDS
     @space_interation = options[:space_interation] || SPACE_INTERATION
+    @mac_word_voice = options[:mac_word_voice] || MAC_WORD_VOICE
+    @mac_translate_voice = options[:mac_translate_voice] || MAC_TRANSLATE_VOICE
   end
 
   def run
@@ -45,10 +47,10 @@ class SayWords
         puts "#{word[0]}: #{word[1]} | #{!word[2].nil? ? word[2].to_i + 1 : 1}"
         #puts 'terminal-notifier -message "'+ word[0] +': '+ word[1] +'" -title "JWords"' if @show_message
         system 'terminal-notifier -message "'+ word[0] +': '+ word[1] +'" -title ""' if @show_message
-        system 'say -v Vicki "'+ word[0] +'"'
+        system 'say -v ' + @mac_word_voice + ' "'+ word[0] +'"'
         sleep @space_words
         #puts "I say #{word[1]}"
-        system 'say -v Milena "'+ word[1] +'"'
+        system 'say -v '+ @mac_translate_voice +' "'+ word[1] +'"'
 
         #set number of showing
         @db.update(idx, [word[0], word[1], !word[2].nil? ? word[2].to_i + 1 : 1])
