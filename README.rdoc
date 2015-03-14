@@ -1,18 +1,34 @@
 = Jumping Words
-The program for Ubuntu or MAC OS X(!!! Only 10.8 or higher version MAC OS X).
-Does this: speaks and displays in the pop-up window the word (phrase) and then translated word (phrase).
+The program speaks and displays in the pop-up window the word or phrase and the word's translation or phrase.
 After end of list back to start.
+
+Supports OS MAC OS X 10.8 or higher or Ubuntu
 
 == Dependencies
 For linux
 sudo apt-get install libnotify-bin
 
-For MAC OS X for the Russian users you must change the voice of system to Milena
+On MAC OS X before you start, you should add to your system the voices for words and translates.
+To enable the speech recognition ability and use speech commands on your Mac, the first thing you have to do is open the Speech menu from System Preferences.
 
+For example for Russian you should install the Milena voice.
+
+== Config
+Default:
+  Show message: true
+  Timeout between a word and translate: 3 sec.
+  Timeout to start list: 10 sec.
+  MAC OS X word voice: Vicki.
+  MAC OS X translate voice: Milena.
+
+More:
+  jwords -h
 
 == Actions
 Starting
   jwords start
+or
+  jwords -v Fiona -t Milena start
 
 Stoping
   ctrl+c
