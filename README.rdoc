@@ -1,6 +1,6 @@
 = Jumping Words
 The program speaks and displays in the pop-up window the word or phrase and the word's translation or phrase.
-After end of list back to start.
+After end of list back to the start.
 
 Supports OS MAC OS X 10.8 or higher or Ubuntu
 
@@ -28,7 +28,7 @@ More:
 Starting
   jwords start
 or
-  jwords -v Fiona -t Milena start
+  jwords -v Fiona -t Milena -i5 start
 
 Stoping
   ctrl+c

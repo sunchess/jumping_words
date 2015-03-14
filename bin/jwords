@@ -15,6 +15,7 @@ options.space_words = SPACE_WORDS
 options.space_interation = SPACE_INTERATION
 options.mac_word_voice = MAC_WORD_VOICE
 options.mac_translate_voice = MAC_TRANSLATE_VOICE
+options.repeat = REPEAT
 
 optparse = OptionParser.new do |opts|
 
@@ -22,11 +23,15 @@ optparse = OptionParser.new do |opts|
     options.message = false
   end
 
-  opts.on( '-w', '--space-words [SPACE]', Integer, "Space between a word and translate. Default: #{SPACE_WORDS}" ) do |space_words|
+  opts.on( '-r', '--repeat [TIMES]', Integer, "How many times repeat each word in the cycle. Default: #{REPEAT}" ) do |times|
+    options.repeat = times
+  end
+
+  opts.on( '-w', '--timeout-words [SPACE]', Integer, "Timeout between the word and translate. Default: #{SPACE_WORDS}" ) do |space_words|
     options.space_words = space_words
   end
 
-  opts.on( '-i', '--space-interation [SPACE]', Integer, "Space an each interation. Default: #{SPACE_INTERATION}" ) do |space_interation|
+  opts.on( '-i', '--timeout-interation [SPACE]', Integer, "Timeout an each interation. Default: #{SPACE_INTERATION}" ) do |space_interation|
     options.space_interation = space_interation
   end
 
@@ -34,7 +39,7 @@ optparse = OptionParser.new do |opts|
     options.mac_word_voice = voice
   end
 
-  opts.on( '-t', '--mac-translate-voice [VOICE]', String, "#MAC OS X translate voice" ) do |voice|
+  opts.on( '-t', '--mac-translate-voice [VOICE]', String, "MAC OS X translate voice" ) do |voice|
     options.mac_translate_voice = voice
   end
 
@@ -76,12 +81,14 @@ if mac?
   puts "MAC OS X translate voice: #{options.mac_translate_voice}."
 end
 
+puts "How many times repeat each word in the cycle: #{options.repeat}"
+
 #run the application
 if ARGV.first == 'start'
   db = DbWords.new
   app = SayWords.new(:show_message => options.message,  :space_words => options.space_words,
                      :space_interation => options.space_interation, :mac_word_voice => options.mac_word_voice,
-                     :mac_translate_voice => options.mac_translate_voice )
+                     :mac_translate_voice => options.mac_translate_voice, :repeat => options.repeat )
 
   begin
     app.run
