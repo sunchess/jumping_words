@@ -12,7 +12,7 @@ optparse = OptionParser.new do|opts|
   #The command addes a word
   opts.on( '-a', '--add', 'Add the word' ) do
     if ARGV.empty? or ARGV.size < 2
-      puts 'You mast set 2 words! Firs is word, second is translate. Like this: "jwords -a to run: бежать"'
+      puts 'You mast set 2 words! First is word, second is translate. Like this: "jwords -a to run: бежать"'
       exit
     else
       db = DbWords.new(ARGV)
@@ -21,7 +21,7 @@ optparse = OptionParser.new do|opts|
     end
   end
 
-  #The command deletes a word
+  #The command deletes the word
   opts.on( '-d', '--destroy', 'Delete the word' ) do
     if ARGV.empty?
       puts 'You mast set number of word!'
@@ -43,7 +43,7 @@ optparse = OptionParser.new do|opts|
   #run the application
   opts.on( '-s', '--start', 'Start of app' ) do
     db = DbWords.new
-    app = SayWords.new(db.collection, :show_message => SHOW_MESSAGE,  :space_words => SPACE_WORDS, :space_interation => SPACE_INTERATION)
+    app = SayWords.new(:show_message => SHOW_MESSAGE,  :space_words => SPACE_WORDS, :space_interation => SPACE_INTERATION)
 
     begin
       app.run
@@ -55,4 +55,3 @@ optparse = OptionParser.new do|opts|
 end
 
 optparse.parse!
-

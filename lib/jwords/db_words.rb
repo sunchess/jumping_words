@@ -48,10 +48,26 @@ class DbWords
     list
   end
 
+  def update(index, updated_row)
+    list_w = collection
+
+    CSV.open(@file, "w") do |csv|
+      list_w.each_with_index do |row, idx|
+        if index == idx
+          csv << updated_row
+        else
+          csv << row
+        end
+      end
+    end
+
+    GC.start
+  end
+
   #Print the list of words
   def list
     list_of_words do |word, idx|
-      puts "#{idx + 1} #{word[0]}: #{word[1]}"
+      puts "#{idx + 1} #{word[0]} | #{word[1]} | #{word[2]}"
     end
   end
 

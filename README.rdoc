@@ -32,8 +32,13 @@ Adding words to the database
 Delete a word from the database (indicated by the index of the word)
   jwords -d 1
 
+If you want to change words in directly in CSV find .jwords directory in your home directory, then open jumping_words_db.csv. After saving the file restart the script.
+
 == Install
-gem install jumping_words
+ gem install jumping_words
+
+For OS X users: you also should install the https://github.com/alloy/terminal-notifier for notifications.
+  brew install terminal-notifier
 
 == ToDo
 For Ubuntu users give config for changing language system voice.
